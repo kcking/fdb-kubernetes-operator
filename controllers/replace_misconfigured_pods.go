@@ -74,7 +74,7 @@ func (c ReplaceMisconfiguredPods) Reconcile(r *FoundationDBClusterReconciler, co
 		processClass := GetProcessClassFromMeta(pvc.ObjectMeta)
 		desiredPVC, err := GetPvc(cluster, processClass, idNum)
 		pvcHash, err := GetJSONHash(desiredPVC.Spec)
-		if pvc.Annotations[LastSpecKey] != pvcHash {
+		if pvc.Annotations[LastSpecKey] != pvcHash && false { // disable for now
 			instances, err := r.PodLifecycleManager.GetInstances(r, cluster, context, getSinglePodListOptions(cluster, instanceID)...)
 			if err != nil {
 				return false, err
